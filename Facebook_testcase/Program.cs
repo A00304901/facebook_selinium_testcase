@@ -13,6 +13,8 @@ namespace FacebookSignup
         {
             Enter_InValid_Email();
             EmptyField_Testcase_prove();
+            //RESERVED FOR VIHAR THAKKAR   
+            TestValidSignup();
         }
 
         // User entering valid password
@@ -158,5 +160,49 @@ namespace FacebookSignup
                 driver.Quit();
             }
         }
+
+         //TestCase 4 For Signup Method : Milankumar Pandya (A00272016)
+            static void TestValidSignup()
+            {
+            	var driver = new EdgeDriver();
+                try
+                {
+                    driver.Url = "https://www.facebook.com/r.php";
+    
+                    // Fill in valid signup details
+                    var firstName = driver.FindElement(By.Name("firstname"));
+                    firstName.SendKeys("John");
+    
+                    var lastName = driver.FindElement(By.Name("lastname"));
+                    lastName.SendKeys("Doe");
+    
+                    var email = driver.FindElement(By.Name("reg_email__"));
+                    email.SendKeys("john.doe@example.com");
+    
+                    var password = driver.FindElement(By.Name("reg_passwd__"));
+                    password.SendKeys("P@ssw0rd");
+    
+                    var birthDay = new SelectElement(driver.FindElement(By.Name("birthday_day")));
+                    birthDay.SelectByValue("1");
+    
+                    var birthMonth = new SelectElement(driver.FindElement(By.Name("birthday_month")));
+                    birthMonth.SelectByText("Jan");
+    
+                    var birthYear = new SelectElement(driver.FindElement(By.Name("birthday_year")));
+                    birthYear.SelectByValue("2000");
+    
+                    var gender = driver.FindElement(By.CssSelector("input[type='radio'][value='2']"));
+                    gender.Click();
+    
+                    var signUpButton = driver.FindElement(By.CssSelector("button[name='websubmit']"));
+                    signUpButton.Click();
+    
+                    Console.WriteLine("Test case 1: Valid signup - Passed");
+                }
+                finally
+                {
+                    driver.Quit();
+                }
+            }
     }
 }
