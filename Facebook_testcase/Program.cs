@@ -11,11 +11,11 @@ namespace FacebookSignup
     {
         static void Main(string[] args)
         {
-            EnterInValidEmail();
+            Enter_InValid_Email();
         }
 
         // User entering valid password
-        static void EnterInValidEmail()
+        static void Enter_InValid_Email()
         {
             var driver = new EdgeDriver();
             try
@@ -57,11 +57,11 @@ namespace FacebookSignup
                     {
                         Console.WriteLine(message);
                     }
-                    Console.WriteLine("This test is because it was able to prove.");
+                    Console.WriteLine("This test has failed because it was able to find an error message.");
                 }
                 else
                 {
-                    Console.WriteLine("This test is failed because it was not able to prove.");
+                    Console.WriteLine("This test has passed because it was able to find error.");
                 }
                 Console.ReadLine();
             }
