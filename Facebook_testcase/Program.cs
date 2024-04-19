@@ -12,6 +12,7 @@ namespace FacebookSignup
         static void Main(string[] args)
         {
             Enter_InValid_Email();
+            EmptyField_Testcase_prove();
         }
 
         // User entering valid password
@@ -119,6 +120,38 @@ namespace FacebookSignup
                     Console.WriteLine("This test has passed because it was able to find error.");
                 }
                 Console.ReadLine();
+            }
+            finally
+            {
+                driver.Quit();
+            }
+        }
+
+        //2nd test case below
+        //Created by entering last name
+        static void EmptyField_Testcase_prove()
+        {
+            var driver = new EdgeDriver();
+            try
+            {
+                driver.Url = "https://www.facebook.com/r.php";
+
+                var lastName = driver.FindElement(By.Name("lastname"));
+                lastName.SendKeys("");
+
+                var signUpButton = driver.FindElement(By.CssSelector("button[name='websubmit']"));
+                signUpButton.Click();
+
+                var errorMessage = driver.FindElements(By.CssSelector(".uiBoxRed")).Count > 0;
+
+            if (!string.IsNullOrEmpty(lastName.GetAttribute("value")) && !errorMessage)
+            {
+                Console.WriteLine("Test case: Empty Last Name - fail");
+            }
+            else
+            {
+                Console.WriteLine("Test case: Empty Last Name - pass");
+            }
             }
             finally
             {
