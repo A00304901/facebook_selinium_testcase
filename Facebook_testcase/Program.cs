@@ -70,5 +70,60 @@ namespace FacebookSignup
                 driver.Quit();
             }
         }
+         static void Enter_InValid_password()
+        {
+            var driver = new EdgeDriver();
+            try
+            {
+                driver.Url = "https://www.facebook.com/r.php";
+
+                var first_Name = driver.FindElement(By.Name("firstname"));
+                first_Name.SendKeys("Jacky");
+
+                var last_Name = driver.FindElement(By.Name("lastname"));
+                last_Name.SendKeys("Doe");
+
+                var mobile_Number = driver.FindElement(By.Name("reg_email__"));
+                mobile_Number.SendKeys("jacky@gmail.com");
+
+                var password = driver.FindElement(By.Name("reg_passwd__"));
+                password.SendKeys("Password");
+
+                var dob = new SelectElement(driver.FindElement(By.Name("birthday_day")));
+                dob.SelectByValue("2");
+
+                var birthday_Month = new SelectElement(driver.FindElement(By.Name("birthday_month")));
+                birthday_Month.SelectByValue("10");
+
+                var birthday_Year = new SelectElement(driver.FindElement(By.Name("birthday_year")));
+                birthday_Year.SelectByValue("1999");
+
+                var Gender = driver.FindElement(By.CssSelector("input[type='radio'][value='2']"));
+                Gender.Click();
+
+                var signUpButton = driver.FindElement(By.Name("websubmit"));
+                signUpButton.Click();
+
+                var errorMessage = driver.FindElements(By.CssSelector(".uiMessage.error")).Select((x) => x.Text);
+
+                if (errorMessage.Any())
+                {
+                    foreach (var message in errorMessage)
+                    {
+                        Console.WriteLine(message);
+                    }
+                    Console.WriteLine("This test has failed because it was able to find an error message.");
+                }
+                else
+                {
+                    Console.WriteLine("This test has passed because it was able to find error.");
+                }
+                Console.ReadLine();
+            }
+            finally
+            {
+                driver.Quit();
+            }
+        }
     }
 }
