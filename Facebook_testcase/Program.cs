@@ -17,7 +17,7 @@ namespace FacebookSignup
             TestValidSignup();
         }
 
-        // User entering valid password
+        // User entering valid/Invalid email address.~ Venus Patel (A00265063)
         static void Enter_InValid_Email()
         {
             var driver = new EdgeDriver();
